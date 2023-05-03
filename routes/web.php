@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RaumController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,16 +29,11 @@ Route::get('/', function () {
 
 
 
-// Route::group(['middleware' => 'auth'], function () {
-//     Route::get('/', function () {
-//         return view('index');
-//     });   
-// });
-
 // Auth routes
 Route::get('/login',    [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login',       [LoginController::class, 'login'])->name('login');
     Route::get ('/logout',      [LoginController::class, 'logout'])->name('logout');
+    Route::post ('/logout',      [LoginController::class, 'logout'])->name('logout');
 
 
 // Routes for Admins only
@@ -45,6 +41,12 @@ Route::middleware(['web', 'auth:web'])->group(function() {
 
     Route::get('/test', function () {
         return view('test'); })->name('test');
+
+    
+    
+    // Admin
+    Route::get('/index',    [RaumController::class, 'index'])->name('index');
+
 
 });
 

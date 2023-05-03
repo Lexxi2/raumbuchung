@@ -1,0 +1,39 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+class UserSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        // seed the SOGo Room Users
+        DB::table('users')->insert([
+            [
+                'name' => 'meetingroom1', 
+                'email' => 'meetingroom1@kastgroup.com',
+                'password' => 'pSVa}dcm-/cHZoe9&,',
+                'username' => 'mail_meetingroom1',
+            ],
+            [
+                'name' => 'meetingroom2', 
+                'email' => 'meetingroom2@kastgroup.com',
+                'password' => '";H*rGF/B5BBA~}v9+',
+                'username' => 'mail_meetingroom2',
+            ],
+            [
+                'name' => 'meetingroom3', 
+                'email' => 'meetingroom3@kastgroup.com',
+                'password' => '5"3!=%~/,Ftd,^v:@3',
+                'username' => 'mail_meetingroom3',
+            ],
+
+        ]);
+    }
+}
