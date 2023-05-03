@@ -62,7 +62,7 @@ return [
     'providers' => [
         'ldap' => [
             'driver' => 'ldap',
-            'model' => App\Models\Admin::class,
+            'model' => LdapRecord\Models\FreeIPA\User::class,
             'rules' => [],
             'database' => [
                 'model' => App\Models\User::class,
