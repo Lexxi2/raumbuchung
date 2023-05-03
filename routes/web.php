@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,14 +15,38 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/ldap', function () {
+    ddd(Admin::all());
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Route::group(['middleware' => 'auth'], function () {
+//     Route::get('/', function () {
+//         return view('index');
+//     });   
+// });
+
+// Admin auth routes
+Route::get('/login',    [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login',       [LoginController::class, 'login'])->name('login');
+    Route::get ('/logout',      [LoginController::class, 'logout'])->name('logout');
+
+
+
+
+// Routes for Admins only
+Route::middleware(['web', 'auth:web'])->group(function() {
+
+    Route::get('/test', function () {
+        return view('test'); })->name('test');
+
+});
+
