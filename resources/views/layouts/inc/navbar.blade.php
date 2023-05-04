@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light sticky-top px-5">
+<nav class="navbar navbar-expand-lg sticky-top px-5" style="background-color: rgb(228, 228, 228)">
 
-    <div class="container">
+    <div class="container" >
         <a class="navbar-brand" href="{{ url('/') }}">
             {{-- {{ config('app.name', 'Laravel') }} --}}
             Raumbuchung
@@ -14,18 +14,11 @@
             <ul class="navbar-nav">
                 <!-- Räume -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Raum
-                        {{-- {{ tenant()->name ?? 'Tenant:' }}  --}}
-
-                    </a>
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Raum</a>
                     <ul class="dropdown-menu">
-                        {{-- @foreach(user()->tenants() as $tenant)
-                            <li><a class="dropdown-item" href="{{ url("$tenant->id/dashboard") }}">{{ $tenant->name }}</a></li>
-                        @endforeach --}}
                         <li><a class="dropdown-item" href="">Raum_1</a></li>
                     </ul>
                 </li>          
-
             </ul>
 
 
@@ -39,8 +32,9 @@
                         Admin Control
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ route('index') }}">Räume</a></li>
-                        {{-- {{ route('raum.index') }} --}}
+                        <li><a class="dropdown-item" href="{{ route('room.index') }}">Räume</a></li>
+                        <li><a class="dropdown-item" href="{{ route('room.create') }}">Raum erstellen</a></li>
+                       
                     </ul>
                 </li>
                 {{-- @endadmin --}}
@@ -85,7 +79,6 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="">DE</a></li>
-                        {{-- {{ route('raum.index') }} --}}
                     </ul>
                 </li>
             </ul>

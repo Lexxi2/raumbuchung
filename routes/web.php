@@ -2,8 +2,9 @@
 
 use App\Models\Admin;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RaumController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\Auth\LoginController;
+use LdapRecord\Models\OpenLDAP\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,8 @@ use App\Http\Controllers\Auth\LoginController;
 */
 
 Route::get('/ldap', function () {
-    ddd(App\Models\User::all());
+    // ddd(User::all());  // LDAPRecord
+    ddd(App\Models\User::all()->first());
 });
 
 Route::get('/', function () {
@@ -45,7 +47,12 @@ Route::middleware(['web', 'auth:web'])->group(function() {
     
     
     // Admin
-    Route::get('/index',    [RaumController::class, 'index'])->name('index');
+    Route::get('/index',    [RoomController::class, 'index'])->name('room.index');
+    Route::get('/create',    [RoomController::class, 'create'])->name('room.create');
+    Route::post('/store',    [RoomController::class, 'store'])->name('room.store');
+    Route::post('/update/{id}',    [RoomController::class, 'update'])->name('room.update');
+    Route::get('/edit/{username}',    [RoomController::class, 'edit'])->name('room.edit');
+    Route::delete('/delete/{id}',    [RoomController::class, 'destroy'])->name('room.destroy');
 
 
 });
