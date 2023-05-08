@@ -42,7 +42,7 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         if (Auth::check()) {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard.index');
         } else {
             return view('auth.login');
         }
@@ -70,7 +70,7 @@ class LoginController extends Controller
         ];
 
         if (Auth::attempt($credentials)) {
-            return redirect(route('test'));
+            return redirect(route('dashboard.index'));
         } 
         
         // TODO: return err msg + display on view.

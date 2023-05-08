@@ -35,15 +35,15 @@
                     <tbody>
 
                         @foreach ($rooms as $room)
-                            <tr style="background-color: {{ $room->color }}">
+                            <tr style="border: 5px solid; border-color: {{ $room->color }}">
                                 <td scope="row">{{ $room->name }}</td>
                                 <td>{{ $room->location }}</td>
-                                <td><a href="{{ route('room.edit', $room->id) }}" class="btn btn-outline-success" style="background-color: rgb(228, 228, 228)"><i class="fa-solid fa-pen-to-square"></i>Editieren</a></td>
+                                <td><a href="{{ route('room.edit', $room->id) }}" class="btn btn-outline-success" ><i class="fa-solid fa-pen-to-square"></i>Editieren</a></td>
                                 <td>
                                     <form action="{{ route('room.destroy', $room->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <input type="submit" value="Löschen" class="btn btn-outline-danger" style="background-color: rgb(228, 228, 228)"
+                                        <input type="submit" value="Löschen" class="btn btn-outline-danger"
                                             onclick="return confirm('Are you sure to delete?')">
                                     </form>
                                 </tr>       
@@ -56,5 +56,5 @@
         </div>
     </div>
 
-
+{{-- style="background-color: rgb(228, 228, 228)" --}}
 @endsection

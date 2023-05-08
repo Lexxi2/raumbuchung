@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone')->nullable();
             $table->string('memberof')->nullable();
+            
+            $table->boolean('is_admin')->default(false);
 
             $table->timestamps();
         });
