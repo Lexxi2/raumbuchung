@@ -59,7 +59,7 @@
 
                                     {{-- Passwort --}}
                                     <div class="form-floating mb-3 mx-1">
-                                        <input class="form-control form-control-lg mt-3"  name="password" type="text" id="floatingInput" placeholder="" value="" >
+                                        <input class="form-control form-control-lg mt-3"  name="password" type="password" id="floatingInput" placeholder="" value="" >
                                         <label for="floatingInput">Passwort</label>
                                     </div>
                                  

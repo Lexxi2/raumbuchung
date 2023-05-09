@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Room;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -25,5 +26,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('is_admin', function(User $user) {
             return $user->is_admin == true;
         });
+
+        view()->share('all_rooms', Room::all());
     }
 }

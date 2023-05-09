@@ -24,7 +24,8 @@
 
                 <table class="table">
                     <thead>
-                        <tr>
+                        <tr style=" background-color: #ececec;">
+                            <th scope="col"></th>
                             <th scope="col">Raumname</th>
                             <th scope="col">Ort</th>
                             <th scope="col">Editieren</th>
@@ -34,8 +35,9 @@
 
                     <tbody>
 
-                        @foreach ($rooms as $room)
-                            <tr style="border: 5px solid; border-color: {{ $room->color }}">
+                        @foreach ($all_rooms as $room)
+                            <tr>
+                                <td  style="background-color:{{ $room->color }}"></td>
                                 <td scope="row">{{ $room->name }}</td>
                                 <td>{{ $room->location }}</td>
                                 <td><a href="{{ route('room.edit', $room->id) }}" class="btn btn-outline-success" ><i class="fa-solid fa-pen-to-square"></i>Editieren</a></td>
@@ -46,7 +48,8 @@
                                         <input type="submit" value="Löschen" class="btn btn-outline-danger"
                                             onclick="return confirm('Are you sure to delete?')">
                                     </form>
-                                </tr>       
+                                </td>
+                            </tr>       
                         @endforeach
                         
                     </tbody>
@@ -56,5 +59,7 @@
         </div>
     </div>
 
-{{-- style="background-color: rgb(228, 228, 228)" --}}
+{{-- style="background-color: rgb(228, 228, 228)" 
+style="border: 5px solid; border-color: {{ $room->color }}"
+--}}
 @endsection

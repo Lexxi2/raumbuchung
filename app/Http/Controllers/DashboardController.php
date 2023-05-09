@@ -15,11 +15,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $all_rooms = Room::all();
-
-        return view('pages.dashboard.index', [
-            'all_rooms'    => $all_rooms,
-        ]);
+        return view('pages.dashboard.index');
     }
 
     /**
@@ -39,23 +35,19 @@ class DashboardController extends Controller
 
         $room = Room::find($data['room']);
 
-        // ddd($data);
-        // ddd( date("Y-m-d H:i:s", strtotime($data['von']) ) );
-
+        // first validation
         $validator = Validator::make($request->all(), [
             'title'      => ['required'],
             'von'        => ['required'],
             'bis'        => ['required'],
         ]);
 
-
         if ($validator->fails()) {
 
             return redirect(route('dashboard.show', $room->id))->withErrors($validator)->withInput($request->input());;
 
         } else {
-
-            // custom validation for calendar entry not overlapping
+            // second custom validation for calendar entry not overlapping
 
             // conversion of input data
             $von = strtotime($data['von']);
@@ -89,11 +81,7 @@ class DashboardController extends Controller
                 }
             }
 
-
             // store
-            // ddd($data);
-            // ddd( date("Y-m-d H:i:s",strtotime($data['von']) ) );
-
             $title = $data['title'];
             $start = date("Y-m-d H:i:s", strtotime($data['von']));
             $end = date("Y-m-d H:i:s", strtotime($data['bis']));
@@ -108,22 +96,35 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($room)
+    public function show($room_id)
     {
-        $room = Room::find($room);
-        // ddd($room);
+        $room = Room::find($room_id);
 
-        $all_rooms = Room::all();
+        // How many hours should be shown on the calendar
         $timespan = 6+14;
 
+        // get all events of today for this room
         $room_termine = SogoController::getCalendarEntriesToday($room);
 
-        // ddd($room_termine);
+        // make array with events for frontend javascript
+        $events = [];
+        foreach($room_termine as $termin){
+
+            // duration for frontend
+            $duration = abs(strtotime($termin['start_time']) - strtotime($termin['end_time']))/900;  // duration in 15mins
+
+            array_push($events, [
+                'title' => $termin['title'],
+                'begin' => date("H:i", strtotime($termin['start_time'])),
+                'end'   => date("H:i", strtotime($termin['end_time'])),
+                'duration' => $duration,
+            ]);
+        }
 
         return view('pages.dashboard.show', [
             'room'     => $room,
-            'all_rooms' => $all_rooms,
             'timespan' => $timespan,
+            'events'  => $events,
         ]);
     }
 

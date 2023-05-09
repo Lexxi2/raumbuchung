@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\API\SogoController;
 
@@ -15,11 +16,7 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::all();
-
-        return view('pages.room.index', [
-            'rooms' => $rooms,
-        ]);
+        return view('pages.room.index');
     }
 
     /**
@@ -83,10 +80,8 @@ class RoomController extends Controller
     {
         $room = Room::findOrFail($room_id);
 
-        // ddd($room);
         return view('pages.room.edit', [
             'room'   => $room,
-            // 'data'   => $data ?? [],
         ]);
     }
 
@@ -115,7 +110,17 @@ class RoomController extends Controller
 
         } else {
             // update
-            $room->update($data);
+            $room->update([
+                'email'        => $data['email'],
+                'username'     => $data['username'],
+                'name'         => $data['name'],
+                'location'     => $data['location'],
+                'color'        => $data['color'],
+                'password'     => Crypt::encryptString($data['password']),
+                'description'  => $data['description'],
+
+            ]);
+            $room->save();
 
             // redirect
             return redirect(route('room.index'));

@@ -24,7 +24,7 @@ class SogoController extends Controller
     // https://mail.khost.ch/SOGo/dav/<cn>/Calendar/personal/<uuid>.ics 
 
 
-    // create new event in SOGo Calender
+    // create new event in SOGo Calendar
     public static function postEvent($room, $title, $start, $end)
     {
         $room = Room::find($room);
@@ -35,7 +35,7 @@ class SogoController extends Controller
 
         $client->connect($url, $room->username, Crypt::decryptString($room->password));
 
-        $arrayOfCalendars = $client->findCalendars(); // Returns an array of all accessible calendars on the server.
+        $arrayOfCalendars = $client->findCalendars();
 
         $client->setCalendar($arrayOfCalendars["personal"]);
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use LdapRecord\Container;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -42,8 +44,10 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         if (Auth::check()) {
+            
             return redirect()->route('dashboard.index');
         } else {
+            // ddd(auth()->user());
             return view('auth.login');
         }
     }
@@ -51,6 +55,8 @@ class LoginController extends Controller
     private function getCredentials($email)
     {
         $user = User::where('username', $email)->first();
+
+        // ddd($user);
 
         return [
             'username' => $user->username ?? null,
@@ -70,6 +76,43 @@ class LoginController extends Controller
         ];
 
         if (Auth::attempt($credentials)) {
+            // ddd($credentials);
+
+            // set is_admin for Admin controlls
+            // Establish a connection to the LDAP server.
+            Container::setDefaultConnection('default');
+            
+            // Retrieve the LDAP connection.
+            $connection = Container::getConnection();
+            
+            // Search for the user by UID.
+            $user = $connection->query()
+            ->where('uid', '=', $credentials['uid'])
+            ->first();
+            
+            // ddd($user['memberof']);
+            // ddd(in_array('cn=app_room-res_admin,cn=groups,cn=accounts,dc=ikhost,dc=ch', $user['memberof']));
+
+            if( in_array('cn=app_room-res_admin,cn=groups,cn=accounts,dc=ikhost,dc=ch', $user['memberof']) ){
+                $u = Auth::user();
+                // ddd($u);
+                $us = (User::findOrFail($u->id));
+                $us->is_admin = true;
+                $us->save();
+
+                // ddd($us);
+                // auth()->user()->is_admin = 1;
+                // ddd(auth()->user()->is_admin);
+            } else {
+                $u = Auth::user();
+                // ddd($u);
+                $us = (User::findOrFail($u->id));
+                $us->is_admin = false;
+                $us->save();
+                // $user = Auth::user();
+                // User::findOrFail($user->id)->update(['is_admin' => false]);
+            }
+
             return redirect(route('dashboard.index'));
         } 
         

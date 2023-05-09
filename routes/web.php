@@ -8,6 +8,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use LdapRecord\Models\FreeIPA\User as FreeIPAUser;
 
+use LdapRecord\Container;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,12 +21,33 @@ use LdapRecord\Models\FreeIPA\User as FreeIPAUser;
 |
 */
 
-Route::get('/ldap', function () {
-    // ddd(User::all());  // LDAPRecord
-    ddd(FreeIPAUser::find(['uid' => 'schneideralexa']));
+// Route::get('/ldap', function () {
+//     // ddd(User::all());  // LDAPRecord
+//     ddd(FreeIPAUser::all());
+//     ddd(FreeIPAUser::all()->where('uid', '=', 'schneideralexa'));
+//     ddd(FreeIPAUser::find(['uid' => 'schneideralexa']));
 
-    ddd(App\Models\User::all()->first());
-});
+//     ddd(App\Models\User::all()->first());
+// });
+
+
+Route::get('/ldap', function () {
+    // Establish a connection to the LDAP server.
+    Container::setDefaultConnection('default');
+    
+    // Retrieve the LDAP connection.
+    $connection = Container::getConnection();
+    
+    // Search for the user by UID.
+    $user = $connection->query()
+    ->where('uid', '=', 'schneideralexa')
+    ->first();
+    
+    // ddd($user['memberof']);
+    
+    ddd(in_array('cn=app_room-res_admin,cn=groups,cn=accounts,dc=ikhost,dc=ch', $user['memberof']));
+    
+    });
 
 // Route::get('/', function () {
 //     return view('pages.dashboard.index');

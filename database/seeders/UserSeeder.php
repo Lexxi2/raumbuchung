@@ -18,12 +18,13 @@ class UserSeeder extends Seeder
     public function run()
     {
         // Creating test user 
-        User::create([
-            'name'              => 'tu_godalfreinhard',
-            'email'             => 'tu_godalfreinhard@test.local',
-            'email_verified_at' => now(),
-            'remember_token'    => Str::random(10),
-            'password'          => 'F,}k!U{WTEwsr9xvLZvH$F/@i-!b.R',
-        ]);
+        // User::create([
+        //     'username'          => 'tu_godalfreinhard',
+        //     'name'              => 'godalfreinhard tu',
+        //     'email'             => 'tu_godalfreinhard@test.local',
+        //     'email_verified_at' => now(),
+        //     'remember_token'    => Str::random(10),
+        //     'password'          => 'F,}k!U{WTEwsr9xvLZvH$F/@i-!b.R',
+        // ]);
     }
 }

@@ -1,9 +1,8 @@
- <nav class="navbar navbar-expand-lg sticky-top px-5" style="background-color: rgb(228, 228, 228)">
+ <nav class="navbar navbar-expand-lg sticky-top px-5" style=" background-color: #ececec">
 
      <div class="container">
-         <a class="navbar-brand" href="{{ url('/dasboard') }}">
-             {{-- {{ config('app.name', 'Laravel') }} --}}
-             Raumbuchung
+         <a class="navbar-brand" href="{{ route('dashboard.index') }}">
+            {{ config('app.name', 'Raumbuchung') }}
          </a>
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -16,11 +15,12 @@
                  <!-- Räume -->
                  <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                         aria-expanded="false">Raum</a>
+                         aria-expanded="false">Raum</a>  
+                         {{-- {{ $room->name ?? 'Raum' }} --}}
                      <ul class="dropdown-menu">
                          @foreach ($all_rooms as $rooms)
                              <li><a class="dropdown-item"
-                                     href="{{ route('dashboard.show', $rooms->id) }}">{{ $rooms->name }}</a></li>
+                                    href="{{ route('dashboard.show', $rooms->id) }}">{{ $rooms->name }}</a></li>
                          @endforeach
                      </ul>
                  </li>
@@ -43,7 +43,6 @@
                          </ul>
                      </li>
                  @endcan
-
 
 
                  <!-- Authentication Links -->
@@ -85,7 +84,8 @@
                          Language
                      </a>
                      <ul class="dropdown-menu">
-                         <li><a class="dropdown-item" href="">DE</a></li>
+                        <li><a class="dropdown-item" href="">DE</a></li>
+                        <li><a class="dropdown-item" href="">EN</a></li>
                      </ul>
                  </li>
              </ul>
