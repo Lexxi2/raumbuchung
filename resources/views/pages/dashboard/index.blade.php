@@ -6,8 +6,7 @@
 
         <div class="row justify-content-center">
             <div class="col-md-15">
-                <h2>Dashboard</h2>
-
+                <h2>{{ __('messages.dashboard') }}</h2>
 
             </div>
         </div>

@@ -47,7 +47,7 @@ class DashboardController extends Controller
             return redirect(route('dashboard.show', $room->id))->withErrors($validator)->withInput($request->input());;
 
         } else {
-            // second custom validation for calendar entry not overlapping
+           // second custom validation for calendar entry not overlapping
 
             // conversion of input data
             $von = strtotime($data['von']);

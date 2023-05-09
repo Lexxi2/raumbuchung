@@ -15,7 +15,7 @@
                  <!-- Räume -->
                  <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                         aria-expanded="false">Raum</a>  
+                         aria-expanded="false">{{ __('messages.room') }}</a>  
                          {{-- {{ $room->name ?? 'Raum' }} --}}
                      <ul class="dropdown-menu">
                          @foreach ($all_rooms as $rooms)
@@ -37,8 +37,8 @@
                              Admin Control
                          </a>
                          <ul class="dropdown-menu">
-                             <li><a class="dropdown-item" href="{{ route('room.index') }}">Räume</a></li>
-                             <li><a class="dropdown-item" href="{{ route('room.create') }}">Raum erstellen</a></li>
+                             <li><a class="dropdown-item" href="{{ route('room.index') }}">{{ __('messages.rooms') }}</a></li>
+                             <li><a class="dropdown-item" href="{{ route('room.create') }}">{{ __('messages.create_room') }}</a></li>
 
                          </ul>
                      </li>
@@ -84,8 +84,8 @@
                          Language
                      </a>
                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="">DE</a></li>
-                        <li><a class="dropdown-item" href="">EN</a></li>
+                        <li><a class="dropdown-item" href="{{ route('language', 'de') }}">DE</a></li>
+                        <li><a class="dropdown-item" href="{{ route('language', 'en') }}">EN</a></li>
                      </ul>
                  </li>
              </ul>

@@ -1,14 +1,15 @@
 <?php
 
 use App\Models\Admin;
+use LdapRecord\Container;
 use LdapRecord\Models\OpenLDAP\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
-use LdapRecord\Models\FreeIPA\User as FreeIPAUser;
 
-use LdapRecord\Container;
+use App\Http\Controllers\LocalizationController;
+use LdapRecord\Models\FreeIPA\User as FreeIPAUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +70,9 @@ Route::middleware(['web', 'auth:web'])->group(function() {
     Route::get('/dashboard/{room}',   [DashboardController::class, 'show'])->name('dashboard.show');
     // neue Buchungen
     Route::post('/dashboard/store',    [DashboardController::class, 'store'])->name('dashboard.store');
+
+    // Localization
+    Route::get('localization/{locale}', [LocalizationController::class, 'change'])->name('language');
 
     // Admin
     Route::get('/index',    [RoomController::class, 'index'])->name('room.index');
