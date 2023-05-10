@@ -48,11 +48,8 @@ Route::get('/ldap', function () {
     
     ddd(in_array('cn=app_room-res_admin,cn=groups,cn=accounts,dc=ikhost,dc=ch', $user['memberof']));
     
-    });
+});
 
-// Route::get('/', function () {
-//     return view('pages.dashboard.index');
-// });
 
 
 // Auth routes
@@ -62,17 +59,18 @@ Route::get ('/logout',      [LoginController::class, 'logout'])->name('logout');
 Route::post ('/logout',      [LoginController::class, 'logout'])->name('logout');
 
 
+// Dashboard
+Route::get('/dashboard',   [DashboardController::class, 'index'])->name('dashboard.index');
+Route::get('/dashboard/{room}',   [DashboardController::class, 'show'])->name('dashboard.show');
+// neue Buchungen
+Route::post('/dashboard/store',    [DashboardController::class, 'store'])->name('dashboard.store');
+
+// Localization
+Route::get('localization/{locale}', [LocalizationController::class, 'change'])->name('language');
+
+
 // Routes for Auth
 Route::middleware(['web', 'auth:web'])->group(function() {
-
-    // Dashboard
-    Route::get('/dashboard',   [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('/dashboard/{room}',   [DashboardController::class, 'show'])->name('dashboard.show');
-    // neue Buchungen
-    Route::post('/dashboard/store',    [DashboardController::class, 'store'])->name('dashboard.store');
-
-    // Localization
-    Route::get('localization/{locale}', [LocalizationController::class, 'change'])->name('language');
 
     // Admin
     Route::get('/index',    [RoomController::class, 'index'])->name('room.index');
@@ -81,7 +79,6 @@ Route::middleware(['web', 'auth:web'])->group(function() {
     Route::post('/update/{id}',    [RoomController::class, 'update'])->name('room.update');
     Route::get('/edit/{username}',    [RoomController::class, 'edit'])->name('room.edit');
     Route::delete('/delete/{id}',    [RoomController::class, 'destroy'])->name('room.destroy');
-
 
 });
 

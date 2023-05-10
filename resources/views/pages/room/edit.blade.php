@@ -34,19 +34,19 @@
                                     {{-- Email --}}
                                     <div class="form-floating mb-3 mx-1">
                                         <input class="form-control form-control-lg mt-3"  name="email" type="text" id="floatingInput" placeholder="" value="{{ old('email') ?? $room->email }}" >
-                                        <label for="floatingInput">Email</label>
+                                        <label for="floatingInput">Email <span class="required">*</span></label>
                                     </div>
 
                                     {{-- Bezeichnung : <cn> --}}
                                     <div class="form-floating mb-3 mx-1">
                                         <input class="form-control form-control-lg mt-3"  name="username" type="text" id="floatingInput" placeholder="" value="{{ old('username') ?? $room->username }}" >
-                                        <label for="floatingInput">Bezeichnung / cn</label>
+                                        <label for="floatingInput">Bezeichnung / cn <span class="required">*</span></label>
                                     </div>
                                 
                                     {{-- Raumname --}}
                                     <div class="form-floating mb-3 mx-1">
                                         <input class="form-control form-control-lg mt-3"  name="name" type="text" id="floatingInput" placeholder="" value="{{ old('name') ??  $room->name }}" >
-                                        <label for="floatingInput">Raumname</label>
+                                        <label for="floatingInput">Raumname <span class="required">*</span></label>
                                     </div>
             
                                     {{-- Ort --}}
@@ -62,13 +62,13 @@
                                     {{-- Passwort --}}
                                     <div class="form-floating mb-3 mx-1">
                                         <input class="form-control form-control-lg mt-3"  name="password" type="password" id="floatingInput" placeholder="" value="" >
-                                        <label for="floatingInput">Passwort</label>
+                                        <label for="floatingInput">Passwort <span class="required">*</span></label>
                                     </div>
                                  
                                     {{-- Farbe --}}
                                     <div class="form-floating mb-3 mx-1">
                                         <input class="form-control form-control-lg mt-3"  name="color" type="color" id="floatingInput" placeholder="" value="{{ old('color') ??  $room->color }}" >
-                                        <label for="floatingInput">Farbe</label>
+                                        <label for="floatingInput">Farbe <span class="required">*</span></label>
                                     </div>            
             
                                     {{-- Beschreibung --}}

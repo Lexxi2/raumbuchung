@@ -20,6 +20,9 @@
       'location' => 'Location',
       'edit'   => 'Edit',
       'delete'  => 'Delete',
+
+      // edit, create
+      
       
    ];
 
