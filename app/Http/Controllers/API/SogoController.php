@@ -73,7 +73,6 @@ class SogoController extends Controller
                  // Handle attendee
                 if($event->ATTENDEE) {
                     $attendees = [];
-        
                     foreach($event->ATTENDEE as $attendee) {
                         $attendees[] = (string) $attendee;
                     }
@@ -91,7 +90,6 @@ class SogoController extends Controller
         }
     
         $collection = collect($data);
-        // ddd($collection);
 
         return $collection;
     }

@@ -81,7 +81,7 @@
 
                  <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                         Language
+                         {{ strtoupper( session()->get('locale') ) }}
                      </a>
                      <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ route('language', 'de') }}">DE</a></li>

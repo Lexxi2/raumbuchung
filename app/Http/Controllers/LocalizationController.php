@@ -7,18 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 
-class LocalizationController extends Controller {
+class LocalizationController extends Controller
+{
+    public function change(Request $request, $locale)
+    {
+        App::setLocale($locale);
 
+        session()->put('locale', $locale);
 
-   public function change(Request $request, $locale)
-   {
-    // ddd($locale);
-
-       App::setLocale($locale);
-
-       session()->put('locale', $locale);
-
-       return redirect()->back();
-
-   }
+        return redirect()->back();
+    }
 }

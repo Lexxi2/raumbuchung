@@ -76,7 +76,6 @@ class LoginController extends Controller
         ];
 
         if (Auth::attempt($credentials)) {
-            // ddd($credentials);
 
             // set is_admin for Admin controlls
             // Establish a connection to the LDAP server.
@@ -89,34 +88,23 @@ class LoginController extends Controller
             $user = $connection->query()
             ->where('uid', '=', $credentials['uid'])
             ->first();
-            
-            // ddd($user['memberof']);
-            // ddd(in_array('cn=app_room-res_admin,cn=groups,cn=accounts,dc=ikhost,dc=ch', $user['memberof']));
 
             if( in_array('cn=app_room-res_admin,cn=groups,cn=accounts,dc=ikhost,dc=ch', $user['memberof']) ){
                 $u = Auth::user();
-                // ddd($u);
                 $us = (User::findOrFail($u->id));
                 $us->is_admin = true;
                 $us->save();
 
-                // ddd($us);
-                // auth()->user()->is_admin = 1;
-                // ddd(auth()->user()->is_admin);
             } else {
                 $u = Auth::user();
-                // ddd($u);
                 $us = (User::findOrFail($u->id));
                 $us->is_admin = false;
                 $us->save();
-                // $user = Auth::user();
-                // User::findOrFail($user->id)->update(['is_admin' => false]);
             }
 
             return redirect(route('dashboard.index'));
         } 
         
-        // TODO: return err msg + display on view.
         return back()->withError('Credentials doesn\'t match.');
 
     }

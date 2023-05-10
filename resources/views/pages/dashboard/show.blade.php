@@ -19,14 +19,14 @@
                 
                 {{-- <h2>{{ $room->name }}</h2> --}}
 
-                <table id="calendar" class="table">
+                <table id="calendar" class="table" style="border:">
                     <thead>
                         <tr>
                             <th class="sticky_th" scope="col" style="width: 10%">{{ $room->name }}</th>
                             <th class="sticky_th" scope="col" style="text-align:right">
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#terminModal">
-                                    neue Buchung
+                                    {{ __('messages.new_booking') }}
                                 </button>
                             </th>
                         </tr>
@@ -64,7 +64,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="terminModalLabel">Termindaten</h1>
+                                <h1 class="modal-title fs-5" id="terminModalLabel">{{ __('messages.event_data') }}</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -144,11 +144,8 @@
         calendarFill(<?php echo json_encode($events); ?>);
 
         function calendarFill(events) {
-            // document.getElementById("demo").innerHTML = "Table is loaded.";
-
             // alert(events[0].begin);
-
-            console.log(color);
+            // console.log(color);
 
             events.forEach(element => {
                 console.log(element)
@@ -158,9 +155,7 @@
 
                 document.getElementById(element.begin).style.verticalAlign = "middle";
                 document.getElementById(element.begin).style.textAlign = "center";
-                document.getElementById(element.begin).innerHTML = element.title + "<br>" + element.begin + " - " + element.end;
-                
-
+                document.getElementById(element.begin).innerHTML = element.title + "<br>" + element.begin + " - " + element.end;   
             });
 
         }
