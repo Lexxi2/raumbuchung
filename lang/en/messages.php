@@ -12,7 +12,7 @@
       'create_room' => 'create room',
 
       'new_booking' => 'new event',
-      'event_data'  => 'Data for the new event',
+      'event_data'  => 'Booking Data',
 
       // rooms index
       'meeting_rooms'  => 'Meeting Rooms',
@@ -21,6 +21,7 @@
       'edit'   => 'Edit',
       'delete'  => 'Delete',
       'save'  => 'Save',
+      'create' => 'Create',
 
       // create
       'username' => 'Username',

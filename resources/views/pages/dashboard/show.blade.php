@@ -112,7 +112,7 @@
                                         <label for="floatingInput">{{ __('messages.end') }} <span class="required">*</span></label>
                                     </div>
 
-                                <input class="form-control form-control-lg mt-3" id="submit1" type="submit" value="Speichern">
+                                <input class="form-control form-control-lg mt-3" id="submit1" type="submit" value="{{ __('messages.save') }}">
                             </div>
 
                             <div class="modal-footer">

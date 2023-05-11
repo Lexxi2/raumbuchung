@@ -39,7 +39,7 @@ class RoomSeeder extends Seeder
                 'password' => Crypt::encryptString('5"3!=%~/,Ftd,^v:@3'),
                 'username' => 'mail_meetingroom3',
                 'location' => '',
-                'color'    => '#fc03ca',
+                'color'    => '#9999ff',
             ],
 
         ]);

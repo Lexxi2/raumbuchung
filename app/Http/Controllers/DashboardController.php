@@ -55,28 +55,27 @@ class DashboardController extends Controller
 
             // get all calender entries of today
             $calendar_entries = SogoController::getCalendarEntriesToday($room);
-            // ddd($calendar_entries);
 
             foreach($calendar_entries as $entry){
 
                 // 1 : existing entry end_time in new entry timespan
                 if( (strtotime($entry['start_time']) <= $von) && (strtotime($entry['end_time']) >= $von && strtotime($entry['end_time']) >= $bis) ){
 
-                    $validator->errors()->add('von', 'Es existiert bereits ein Eintrag zu dieser von-Zeit');
+                    $validator->errors()->add('von', 'Es existiert bereits ein Eintrag zu diesem Zeitraum');
                     return back()->withErrors($validator)->withInput();
                 }
 
                 // 2 : existing entry start_time and end_time in new entry timespan
-                if( (strtotime($entry['start_time']) >= $von) && (strtotime($entry['end_time']) <= $bis) ){
+                if( (strtotime($entry['start_time']) >= $von && strtotime($entry['start_time']) <= $bis) && (strtotime($entry['end_time']) >= $bis) ){
 
-                    $validator->errors()->add('von', 'Es existiert bereits ein Eintrag in diesem Zeitraum');
+                    $validator->errors()->add('bis', 'Es existiert bereits ein Eintrag zu diesem Zeitraum');
                     return back()->withErrors($validator)->withInput();
                 }
 
                 // 3 : existing entry start_time in new entry timespan
-                if( (strtotime($entry['start_time']) >= $von && strtotime($entry['start_time']) <= $bis) && (strtotime($entry['end_time']) >= $bis) ){
+                if( (strtotime($entry['start_time']) <= $von) && (strtotime($entry['end_time']) >= $von) && (strtotime($entry['end_time']) <= $bis) ){
 
-                    $validator->errors()->add('bis', 'Es existiert bereits ein Eintrag zu dieser bis-Zeit');
+                    $validator->errors()->add('von', 'Es existiert bereits ein Eintrag in diesem Zeitraum');
                     return back()->withErrors($validator)->withInput();
                 }
             }

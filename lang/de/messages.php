@@ -8,7 +8,7 @@
       // Nav
       'room' => 'Raum',
       'rooms' => 'Räume',
-      'create_room' => 'erstelle Raum',
+      'create_room' => 'Erstelle Raum',
 
       'new_booking' => 'neue Buchung',
       'event_data' => 'Termindaten',

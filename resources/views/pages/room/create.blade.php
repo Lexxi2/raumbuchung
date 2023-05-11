@@ -6,7 +6,7 @@
 
         <div class="row justify-content-center">
             <div class="col-md-15">
-                <h2>Erstellen</h2>
+                <h2>{{ __('messages.create') }}</h2>
 
                 <div class="py-10">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
