@@ -38,13 +38,13 @@
                                     {{-- Bezeichnung : <cn> --}}
                                     <div class="form-floating mb-3 mx-1">
                                         <input class="form-control form-control-lg mt-3"  name="username" type="text" id="floatingInput" placeholder="" value="{{ old('username') }}" >
-                                        <label for="floatingInput">Bezeichnung / cn <span class="required">*</span></label>
+                                        <label for="floatingInput">{{ __('messages.username') }}<span class="required">*</span></label>
                                     </div>
                                 
                                     {{-- Raumname --}}
                                     <div class="form-floating mb-3 mx-1">
                                         <input class="form-control form-control-lg mt-3"  name="name" type="text" id="floatingInput" placeholder="" value="{{ old('name') }}" >
-                                        <label for="floatingInput">Raumname <span class="required">*</span></label>
+                                        <label for="floatingInput">{{ __('messages.room_name') }} <span class="required">*</span></label>
                                     </div>
             
                                     {{-- Ort --}}
@@ -54,28 +54,28 @@
                                             <option value="Wallisellen" @if ( old('location') == 'Wallisellen') selected @endif>Wallisellen</option>
                                             <option value="Schaan" @if ( old('location') == 'Schaan') selected @endif>Schaan</option>
                                         </select>
-                                        <label for="floatingSelect">Ort</label>
+                                        <label for="floatingSelect">{{ __('messages.location') }}</label>
                                     </div>
 
                                     {{-- Passwort --}}
                                     <div class="form-floating mb-3 mx-1">
                                         <input class="form-control form-control-lg mt-3"  name="password" type="password" id="floatingInput" placeholder="" value="" >
-                                        <label for="floatingInput">Passwort <span class="required">*</span></label>
+                                        <label for="floatingInput">{{ __('messages.password') }} <span class="required">*</span></label>
                                     </div>
                                  
                                     {{-- Farbe --}}
                                     <div class="form-floating mb-3 mx-1">
                                         <input class="form-control form-control-lg mt-3"  name="color" type="color" id="floatingInput" placeholder="" value="{{ old('color') }}" >
-                                        <label for="floatingInput">Farbe <span class="required">*</span></label>
+                                        <label for="floatingInput">{{ __('messages.color') }} <span class="required">*</span></label>
                                     </div>            
             
                                     {{-- Beschreibung --}}
                                     <div class="form-floating mb-3 mx-1">
                                         <textarea class="form-control" id="floatingTextarea2" name="description" style="height: 100%" rows="5">{{ old('description') }}</textarea>
-                                        <label for="floatingTextarea2">Beschreibung</label>
+                                        <label for="floatingTextarea2">{{ __('messages.description') }}</label>
                                     </div>
                                 
-                                <input class="form-control form-control-lg mt-3" id="submit1" type="submit" value="Speichern">
+                                <input class="form-control form-control-lg mt-3" id="submit1" type="submit" value="{{ __('messages.save') }}">
         
                             </div>
                         </div>

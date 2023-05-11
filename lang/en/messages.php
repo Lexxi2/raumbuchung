@@ -20,9 +20,20 @@
       'location' => 'Location',
       'edit'   => 'Edit',
       'delete'  => 'Delete',
+      'save'  => 'Save',
 
-      // edit, create
-      
+      // create
+      'username' => 'Username',
+      'password' => 'Password',
+      'color' => 'Color',
+      'description' => 'Description',
+
+
+      // show
+      'title' => 'Title',
+      'start' => 'Start',
+      'end' => 'End',
+      'close' => 'Close',
       
    ];
 

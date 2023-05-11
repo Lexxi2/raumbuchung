@@ -19,6 +19,21 @@
       'location' => 'Ort',
       'edit'   => 'Editieren',
       'delete'  => 'Löschen',
+      'save'  => 'speichern',
+
+      // create
+      'username' => 'Bezeichnung / CN',
+      'password' => 'Passwort',
+      'color' => 'Farbe',
+      'description' => 'Beschreibung',
+
+      // show
+      'title' => 'Titel',
+      'start' => 'Von',
+      'end' => 'Bis',
+      'close' => 'schliessen',
+
+      
       
    ];
 

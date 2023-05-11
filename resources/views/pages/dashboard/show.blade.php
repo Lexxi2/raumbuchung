@@ -97,26 +97,26 @@
                                     {{-- Titel --}}
                                     <div class="form-floating mb-3 mx-1">
                                         <input class="form-control form-control-lg mt-3" name="title" type="text" id="floatingInput" placeholder="" value="{{ old('title') }}">
-                                        <label for="floatingInput">Titel <span class="required">*</span></label>
+                                        <label for="floatingInput">{{ __('messages.title') }} <span class="required">*</span></label>
                                     </div>
 
-                                    {{-- Von --}}
+                                    {{-- Start --}}
                                     <div class="form-floating mb-3 mx-1">
                                         <input class="form-control form-control-lg mt-3" name="von" type="time" id="floatingInput" placeholder="" step="900" value="{{ old('von') }}">
-                                        <label for="floatingInput">Von <span class="required">*</span></label>
+                                        <label for="floatingInput">{{ __('messages.start') }} <span class="required">*</span></label>
                                     </div>
 
-                                    {{-- Bis --}}
+                                    {{-- End --}}
                                     <div class="form-floating mb-3 mx-1">
                                         <input class="form-control form-control-lg mt-3" name="bis" type="time" id="floatingInput" placeholder="" step="900" value="{{ old('bis') }}">
-                                        <label for="floatingInput">Bis <span class="required">*</span></label>
+                                        <label for="floatingInput">{{ __('messages.end') }} <span class="required">*</span></label>
                                     </div>
 
                                 <input class="form-control form-control-lg mt-3" id="submit1" type="submit" value="Speichern">
                             </div>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schliessen</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('messages.close') }}</button>
                             </div>
                         </div>
                     </div>
