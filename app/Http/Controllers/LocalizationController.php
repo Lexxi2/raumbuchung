@@ -11,10 +11,13 @@ class LocalizationController extends Controller
 {
     public function change(Request $request, $locale)
     {
+        // Sets the 'locale' variable in the Application to the given one
         App::setLocale($locale);
 
+        // saves the language in the session
         session()->put('locale', $locale);
 
+        // redirect back
         return redirect()->back();
     }
 }

@@ -27,6 +27,9 @@ class AppServiceProvider extends ServiceProvider
             return $user->is_admin == true;
         });
 
+        // returns a collection of all the rooms in the database
+        // is shared by all Views
+        // is used in the Navbar
         view()->share('all_rooms', Room::all());
     }
 }

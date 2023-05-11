@@ -13,7 +13,7 @@
                         <div class=" overflow-hidden sm:rounded-lg">
                             <div class="p-6 border-b border-gray-200">
         
-                                
+                                {{-- Form --}}
                                 <form method="post" action="{{ route('room.store') }}" enctype="multipart/form-data">
                                     @method('POST')
                                     @csrf

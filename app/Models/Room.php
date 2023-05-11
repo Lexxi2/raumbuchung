@@ -24,5 +24,6 @@ class Room extends Model
      * @var array
      */
     protected $fillable = ['name', 'username', 'email', 'password', 'color', 'location', 'description'];
+    // Fillable Attributes
 
 }

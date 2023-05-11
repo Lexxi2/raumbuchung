@@ -12,6 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rooms', function (Blueprint $table) {
+
+            // DB Table
             $table->id();
             $table->string('name');
             $table->string('username');  // this is the cn

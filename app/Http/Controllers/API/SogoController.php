@@ -29,17 +29,21 @@ class SogoController extends Controller
     {
         $room = Room::find($room);
 
+        // URL with room username, personal Calendar (standard calendar)
         $url = 'https://mail.khost.ch/SOGo/dav/'. $room->username .'/Calendar/personal/';
 
         $client = new SimpleCalDAVClient();
 
+        // connection with decrypted password
         $client->connect($url, $room->username, Crypt::decryptString($room->password));
 
+        // get all calendars
         $arrayOfCalendars = $client->findCalendars();
 
+        // set calendar to personal
         $client->setCalendar($arrayOfCalendars["personal"]);
 
-        // VCalendar Object
+        // VCalendar Object for event
         $vcalendar = new VCalendar([
             'VEVENT' => [
                 'SUMMARY' => $title,
@@ -48,18 +52,22 @@ class SogoController extends Controller
             ]
         ]);
 
+        // create the event
         $client->create($vcalendar->serialize());
     }
 
 
+    // GET Calendar entries of current day
     public static function getCalendarEntriesToday($room)
     {
         // today and tomorrow for sorting of entries
         $today = strtotime(today());
         $tomorrow =  strtotime("tomorrow"); // $tomorrow =  date("Y-m-d H:i:s", strtotime("tomorrow"));
 
+        // URL for request
         $request = HTTP::withBasicAuth($room->username, Crypt::decryptString($room->password))->get('https://mail.khost.ch/SOGo/dav/'. $room->username .'/Calendar/personal.ics');
     
+        // reader for processing of request data
         $vCalendar = Reader::read($request->body());
     
         // Convert Calendar to Laravel Collection
@@ -78,7 +86,7 @@ class SogoController extends Controller
                     }
                 }
         
-                // put data into collection
+                // put data into collection, only data needed
                 $data[] = [
                     'title'       => (string) $event->SUMMARY,
                     'description' => (string) $event->DESCRIPTION,
@@ -89,6 +97,7 @@ class SogoController extends Controller
             }         
         }
     
+        // Laravel collection
         $collection = collect($data);
 
         return $collection;
@@ -96,16 +105,13 @@ class SogoController extends Controller
 
 
     // all entries not sorted or filtered
+    // not in use *
     public static function getCalendarEntries($room)
     {
-        // ddd($room);
+        // URL with room data 
         $request = HTTP::withBasicAuth($room->username, Crypt::decryptString($room->password))->get('https://mail.khost.ch/SOGo/dav/'. $room->username .'/Calendar/personal.ics');
-
-        // ddd($request->body());
     
         $vCalendar = Reader::read($request->body());
-    
-        // ddd($vCalendar);
     
         // Convert Calendar to Laravel Collection
         $data = [];
@@ -121,6 +127,7 @@ class SogoController extends Controller
                 }
             }
     
+            // add needed fields to collection
             $data[] = [
                 'title'       => (string) $event->SUMMARY,
                 'description' => (string) $event->DESCRIPTION,
@@ -130,16 +137,18 @@ class SogoController extends Controller
             ];
         }
     
+        // laravel collection
         $collection = collect($data);
     
-        ddd($collection);
+        // ddd($collection);
     
         return $collection;
     }
 
 
 
-    // for testing 
+    // for testing *
+    // not needed *
     public static function test($username) 
     {
         // get the password from the database
@@ -147,7 +156,7 @@ class SogoController extends Controller
         //     return $value["username"] === $username;
         // });
 
-        $pass = '";H*rGF/B5BBA~}v9+';
+        $pass = '';
 
         $url = 'https://mail.khost.ch/SOGo/dav/' . 'mail_meetingroom2'. '/Calendar/personal';
 

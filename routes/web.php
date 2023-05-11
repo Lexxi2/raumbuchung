@@ -22,16 +22,14 @@ use LdapRecord\Models\FreeIPA\User as FreeIPAUser;
 |
 */
 
-// Route::get('/ldap', function () {
-//     // ddd(User::all());  // LDAPRecord
-//     ddd(FreeIPAUser::all());
-//     ddd(FreeIPAUser::all()->where('uid', '=', 'schneideralexa'));
-//     ddd(FreeIPAUser::find(['uid' => 'schneideralexa']));
-
+// Route::get('/users', function () {
+//     // ddd(User::all());
 //     ddd(App\Models\User::all()->first());
 // });
 
 
+// not used *
+// for testing of LDAP and ldap groups
 Route::get('/ldap', function () {
     // Establish a connection to the LDAP server.
     Container::setDefaultConnection('default');
@@ -46,8 +44,7 @@ Route::get('/ldap', function () {
     
     // ddd($user['memberof']);
     
-    ddd(in_array('cn=app_room-res_admin,cn=groups,cn=accounts,dc=ikhost,dc=ch', $user['memberof']));
-    
+    ddd(in_array('cn=app_room-res_admin,cn=groups,cn=accounts,dc=ikhost,dc=ch', $user['memberof']));   
 });
 
 
@@ -69,9 +66,9 @@ Route::post('/dashboard/store',    [DashboardController::class, 'store'])->name(
 Route::get('localization/{locale}', [LocalizationController::class, 'change'])->name('language');
 
 
-// Routes for Auth
+// Routes only for admins / authenticated users
 Route::middleware(['web', 'auth:web'])->group(function() {
-
+    
     // Admin
     Route::get('/index',    [RoomController::class, 'index'])->name('room.index');
     Route::get('/create',    [RoomController::class, 'create'])->name('room.create');
@@ -81,4 +78,5 @@ Route::middleware(['web', 'auth:web'])->group(function() {
     Route::delete('/delete/{id}',    [RoomController::class, 'destroy'])->name('room.destroy');
 
 });
+
 

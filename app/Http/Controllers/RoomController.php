@@ -34,7 +34,7 @@ class RoomController extends Controller
     {
         $data = $request->all();
 
-        // Validation
+        // Validation rules
         $rules = array(
             'name'         => 'required',
             'username'     => 'required|unique:rooms',
@@ -42,14 +42,16 @@ class RoomController extends Controller
             'password'     => 'required',
             'color'        => 'required',
         );
+        // Validator validates
         $validator = Validator::make($data, $rules);
 
         if ($validator->fails()) {
 
+            // redirects back to the view with the errors and the given input data 
             return redirect(route('room.create'))->withErrors($validator)->withInput($request->input());;
 
         } else {
-            // store
+            // stores the data in the database with the Room Model
             $room = Room::create([
                 'name'         => $data['name'],
                 'username'     => $data['username'],
@@ -78,6 +80,7 @@ class RoomController extends Controller
      */
     public function edit($room_id)
     {
+        // find Room data by ID and retieve the data
         $room = Room::findOrFail($room_id);
 
         return view('pages.room.edit', [
@@ -91,9 +94,10 @@ class RoomController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
+        // find Room data by ID and retieve the data
         $room = Room::findOrFail($id);
 
-        // Validation
+        // Validation rules
         $rules = array(
             'name'         => 'required',
             'username'     => 'required|unique:rooms,username,'.$room->id,
@@ -101,15 +105,17 @@ class RoomController extends Controller
             'password'     => 'required',
             'color'        => 'required',
         );
+        // Validator validates
         $validator = Validator::make($data, $rules);
 
         // check
         if ($validator->fails()) {
             
+            // redirects back to the view with the errors and the given input data 
             return redirect(route('room.edit',$room->id))->withErrors($validator)->withInput($request->input());;
 
         } else {
-            // update
+            // update : uses the Room Model function update() with an data-array passed
             $room->update([
                 'email'        => $data['email'],
                 'username'     => $data['username'],
@@ -120,6 +126,7 @@ class RoomController extends Controller
                 'description'  => $data['description'],
 
             ]);
+            // save the changes
             $room->save();
 
             // redirect
@@ -132,10 +139,12 @@ class RoomController extends Controller
      */
     public function destroy($id)
     {
+        // find Room data by ID and retieve the data
         $room = Room::findOrFail($id);
+        // dletes the Room in the DB
         $room->delete();
 
-        // redirect
+        // redirects with a success message
         return redirect(route('room.index'))->with('success', 'Room deleted');
     }
 }

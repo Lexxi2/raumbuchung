@@ -14,7 +14,8 @@ class RoomSeeder extends Seeder
      */
     public function run(): void
     {
-        // seed the SOGo Room Users
+        // seed the SOGo Room Users with 
+        // encrypted passwords
         DB::table('rooms')->insert([
             [
                 'name' => 'meetingroom1', 

@@ -34,22 +34,27 @@
 
                     <tbody>
 
+                        {{-- start at 7:00 --}}
                         @for ($t = 7; $t <= $timespan; $t++)
+                        {{-- full hour --}}
                             <tr>
-                                <td>@if($t<10){{ 0 }}@endif{{ $t }}:00</td>
-                                <td id="@if($t<10){{ 0 }}@endif{{ $t }}:00"></td>
+                                <td>@if($t<10){{ 0 }}@endif{{ $t }}:00</td> {{-- adds leading 0 --}}
+                                <td id="@if($t<10){{ 0 }}@endif{{ $t }}:00"></td> {{-- unique ID --}}
                             </tr>
 
+                            {{-- :15 --}}
                             <tr>
                                 <td>@if($t<10){{ 0 }}@endif{{ $t }}:15</td>
                                 <td id="@if($t<10){{ 0 }}@endif{{ $t }}:15"></td>
                             </tr>  
 
+                            {{-- :30 --}}
                             <tr>
                                 <td>@if($t<10){{ 0 }}@endif{{ $t }}:30</td>
                                 <td id="@if($t<10){{ 0 }}@endif{{ $t }}:30"></td>
                             </tr>
 
+                            {{-- :45 --}}
                             <tr>
                                 <td>@if($t<10){{ 0 }}@endif{{ $t }}:45</td>
                                 <td id="@if($t<10){{ 0 }}@endif{{ $t }}:45"></td>
@@ -70,6 +75,7 @@
                             </div>
                             <div class="modal-body">
 
+                                {{-- Room Booking Form --}}
                                 <form method="post" action="{{ route('dashboard.store') }}" enctype="multipart/form-data">
                                     @method('POST')
                                     @csrf
@@ -85,25 +91,25 @@
                                         </div>
                                     @endif
 
-                                    {{-- Hidden --}}
+                                    {{-- Hidden Input : room_id --}}
                                     <input class="form-control form-control-lg mt-3" name="room" type="hidden" id="floatingInput" placeholder="" value="{{ $room->id }}">
 
                                     {{-- Titel --}}
                                     <div class="form-floating mb-3 mx-1">
                                         <input class="form-control form-control-lg mt-3" name="title" type="text" id="floatingInput" placeholder="" value="{{ old('title') }}">
-                                        <label for="floatingInput">Titel</label>
+                                        <label for="floatingInput">Titel <span class="required">*</span></label>
                                     </div>
 
                                     {{-- Von --}}
                                     <div class="form-floating mb-3 mx-1">
                                         <input class="form-control form-control-lg mt-3" name="von" type="time" id="floatingInput" placeholder="" step="900" value="{{ old('von') }}">
-                                        <label for="floatingInput">Von</label>
+                                        <label for="floatingInput">Von <span class="required">*</span></label>
                                     </div>
 
                                     {{-- Bis --}}
                                     <div class="form-floating mb-3 mx-1">
                                         <input class="form-control form-control-lg mt-3" name="bis" type="time" id="floatingInput" placeholder="" step="900" value="{{ old('bis') }}">
-                                        <label for="floatingInput">Bis</label>
+                                        <label for="floatingInput">Bis <span class="required">*</span></label>
                                     </div>
 
                                 <input class="form-control form-control-lg mt-3" id="submit1" type="submit" value="Speichern">
@@ -120,7 +126,7 @@
         </div>
     </div>
 
-
+{{-- opens the modal after failed validation --}}
     @if ($errors->any())
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" ;
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
@@ -136,8 +142,10 @@
         </script>
     @endif
 
+    {{-- Fills Calendar entries with Array from the Controller --}}
     <script defer>  
 
+        // Array with calender entries
         var events = <?php echo json_encode($events); ?>;
         var color = <?php echo json_encode($room->color); ?>;
 
@@ -153,6 +161,7 @@
                 document.getElementById(element.begin).setAttribute('rowspan', element.duration);
                 // document.getElementById(element.begin).style.borderBottomWidth = "0px";
 
+                // Booking title and timespan centered
                 document.getElementById(element.begin).style.verticalAlign = "middle";
                 document.getElementById(element.begin).style.textAlign = "center";
                 document.getElementById(element.begin).innerHTML = element.title + "<br>" + element.begin + " - " + element.end;   

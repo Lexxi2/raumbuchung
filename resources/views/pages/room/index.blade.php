@@ -22,6 +22,7 @@
                     </div>
                 @endif
 
+                {{-- Table all Rooms --}}
                 <table class="table">
                     <thead>
                         <tr style=" background-color: #ececec;">
@@ -40,8 +41,9 @@
                                 <td  style="background-color:{{ $room->color }}"></td>
                                 <td scope="row">{{ $room->name }}</td>
                                 <td>{{ $room->location }}</td>
-                                <td><a href="{{ route('room.edit', $room->id) }}" class="btn btn-outline-success" ><i class="fa-solid fa-pen-to-square"></i>{{ __('messages.edit') }}</a></td>
+                                <td><a href="{{ route('room.edit', $room->id) }}" class="btn btn-outline-success" ><i class="fa-solid fa-pen-to-square"></i>{{ __('messages.edit') }}</a></td> {{-- edit --}}
                                 <td>
+                                    {{-- delete --}}
                                     <form action="{{ route('room.destroy', $room->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')

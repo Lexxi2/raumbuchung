@@ -6,7 +6,7 @@
 
         <div class="row justify-content-center">
             <div class="col-md-15">
-                <h2>Bearbeiten</h2>
+                <h2>{{ __('messages.edit') }}</h2>
 
                 <div class="py-10">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -15,6 +15,7 @@
         
                                 {{-- {{ ddd($room) }} --}}
                                 
+                                {{-- Form --}}
                                 <form method="post" action="{{ route('room.update', $room) }}" enctype="multipart/form-data">
                                     @method('POST')
                                     @csrf

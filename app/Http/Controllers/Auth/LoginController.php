@@ -43,21 +43,25 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
+        // Laravel specific way of authentication
         if (Auth::check()) {
             
+            // Authentication success
             return redirect()->route('dashboard.index');
+
         } else {
-            // ddd(auth()->user());
+            
+            // Authentication failed
             return view('auth.login');
         }
     }
 
     private function getCredentials($email)
     {
+        // Find User with the User-Model
         $user = User::where('username', $email)->first();
 
-        // ddd($user);
-
+        // return the user data
         return [
             'username' => $user->username ?? null,
             'password' => $user->password ?? null,
@@ -66,15 +70,17 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-
+        // Laravel Validation
         $this->validateLogin($request);
 
+        // credentials
         $credentials = [
             'uid' => $request->email,
             'password' => $request->password,
             'fallback' => $this->getCredentials($request->email),
         ];
 
+        // Laravel authentication attempt
         if (Auth::attempt($credentials)) {
 
             // set is_admin for Admin controlls
@@ -89,15 +95,18 @@ class LoginController extends Controller
             ->where('uid', '=', $credentials['uid'])
             ->first();
 
+            // check the Users Groupes
             if( in_array('cn=app_room-res_admin,cn=groups,cn=accounts,dc=ikhost,dc=ch', $user['memberof']) ){
                 $u = Auth::user();
                 $us = (User::findOrFail($u->id));
+                // set is_admin to true
                 $us->is_admin = true;
                 $us->save();
 
             } else {
                 $u = Auth::user();
                 $us = (User::findOrFail($u->id));
+                // set is_admin to false
                 $us->is_admin = false;
                 $us->save();
             }
@@ -105,12 +114,15 @@ class LoginController extends Controller
             return redirect(route('dashboard.index'));
         } 
         
+        // if validation failed
         return back()->withError('Credentials doesn\'t match.');
 
     }
 
+    // Logout
     public function logout(Request $request)
     {
+        // laravel logout with Auth
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

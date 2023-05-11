@@ -113,6 +113,7 @@ class DashboardController extends Controller
             // duration for frontend
             $duration = abs(strtotime($termin['start_time']) - strtotime($termin['end_time']))/900;  // duration in 15mins
 
+            // pushes the data on th array
             array_push($events, [
                 'title' => $termin['title'],
                 'begin' => date("H:i", strtotime($termin['start_time'])),
@@ -121,6 +122,7 @@ class DashboardController extends Controller
             ]);
         }
 
+        // Returns the View with all the needed data
         return view('pages.dashboard.show', [
             'room'     => $room,
             'timespan' => $timespan,
