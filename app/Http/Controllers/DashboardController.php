@@ -121,6 +121,7 @@ class DashboardController extends Controller
             ]);
         }
 
+        // return Values
         // Returns the View with all the needed data
         return view('pages.dashboard.show', [
             'room'     => $room,
